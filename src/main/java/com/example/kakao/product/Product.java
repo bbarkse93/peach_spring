@@ -6,6 +6,8 @@ import lombok.*;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
+import com.example.kakao.user.User;
+
 
 
 @Getter
