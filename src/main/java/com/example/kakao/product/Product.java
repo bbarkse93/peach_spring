@@ -1,5 +1,6 @@
 package com.example.kakao.product;
 
+import com.example.kakao.user.User;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -28,14 +29,11 @@ public class Product {
 
     @Column(length = 1000, nullable = false)
     private String content;
-
     private String productPicUrl;
-
     private Timestamp createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
 
     @Builder
     public Product(int id, String productName, Integer price, String category, String content, String productPicUrl, Timestamp createdAt, User user) {
