@@ -22,7 +22,7 @@ public class ProductRestController {
     @GetMapping("/products")
     public ResponseEntity<?> findAll() {
 
-        return null;
+        return ResponseEntity.ok().body(ApiUtils.success(productService.findAll()));
     }
 
     // (기능2) 상품 상세보기
