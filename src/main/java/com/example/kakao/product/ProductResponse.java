@@ -19,6 +19,23 @@ public class ProductResponse {
     @Getter
     @Setter
     public static class FindAllDTO {
+        private int id;
+
+        private String productName;
+
+        private Integer price;
+
+        private String category;
+
+        private String productPicUrl;
+
+        public FindAllDTO(Product product) {
+            this.id = product.getId();
+            this.productName = product.getProductName();
+            this.price = product.getPrice();
+            this.category = product.getCategory();
+            this.productPicUrl = product.getProductPicUrl();
+        }
 
     }
 
