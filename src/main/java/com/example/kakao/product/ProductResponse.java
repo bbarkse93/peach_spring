@@ -1,8 +1,12 @@
 package com.example.kakao.product;
 
-import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.example.kakao.user.User;
+import com.example.kakao.user.UserRequest.LoginDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,17 +33,35 @@ public class ProductResponse {
         private String category;
         private String productPicUrl;
         private String content;
-        private String location;
 
-        public FindByIdDTO(Product product) {
+        private List<LoginDTO> users;
+
+        public FindByIdDTO(Product product, Optional<User> users) {
             this.id = product.getId();
             this.productName = product.getProductName();
             this.price = product.getPrice();
             this.category = product.getCategory();
             this.productPicUrl = product.getProductPicUrl();
             this.content = product.getContent();
-            this.location = product.getUser().getLocation();
+            this.users = users.stream()
+                    .map(u -> new LoginDTO(u))
+                    .collect(Collectors.toList());
         }
 
+        @Getter
+        @Setter
+        class LoginDTO {
+            private Integer id;
+            private String username;
+            private String userPicUrl;
+            private String location;
+
+            public LoginDTO(User user) {
+                this.id = user.getId();
+                this.username = user.getUsername();
+                this.userPicUrl = user.getUserPicUrl();
+                this.location = user.getLocation();
+            }
+        }
     }
 }
