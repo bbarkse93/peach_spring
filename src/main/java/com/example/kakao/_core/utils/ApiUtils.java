@@ -7,21 +7,21 @@ import org.springframework.http.HttpStatus;
 
 public class ApiUtils {
 
-    public static <T> ApiResult<T> success(T response) {
-        return new ApiResult<>(true, response, null);
+    public static <T> ApiResult<T> success(T data) {
+        return new ApiResult<>(1, "response", data);
     }
 
     public static ApiResult<?> error(String message, HttpStatus status) {
-        return new ApiResult<>(false, null, new ApiError(message, status.value()));
+        return new ApiResult<>(-1, null, new ApiError(message, status.value()));
     }
 
     @Getter
     @Setter
     @AllArgsConstructor
     public static class ApiResult<T> {
-        private final boolean success;
-        private final T response;
-        private final ApiError error;
+        private final int code;
+        private final String msg;
+        private final T data;
     }
 
     @Getter
