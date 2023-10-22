@@ -38,9 +38,6 @@ public class ProductService {
         Product productPS = productJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("해당 id의 상품을 찾을 수 없습니다 : " + id));
 
-                Optional<User> users = userJPARepository.findById(id);
-
-
-        return new ProductResponse.FindByIdDTO(productPS, users);
+        return new ProductResponse.FindByIdDTO(productPS);
     }
 }

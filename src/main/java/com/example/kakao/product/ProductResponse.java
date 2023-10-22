@@ -53,14 +53,14 @@ public class ProductResponse {
 
         private LoginDTO user;
 
-        public FindByIdDTO(Product product, Optional<User> user) {
+        public FindByIdDTO(Product product) {
             this.id = product.getId();
             this.productName = product.getProductName();
             this.price = product.getPrice();
             this.category = product.getCategory();
             this.productPicUrl = product.getProductPicUrl();
             this.content = product.getContent();
-            this.user = new LoginDTO(user);
+            this.user = new LoginDTO(product.getUser());
         }
 
         @Getter
@@ -71,11 +71,11 @@ public class ProductResponse {
             private String userPicUrl;
             private String location;
 
-            public LoginDTO(Optional<User> user) {
-                this.id = user.get().getId();
-                this.username = user.get().getUsername();
-                this.userPicUrl = user.get().getUserPicUrl();
-                this.location = user.get().getLocation();
+            public LoginDTO(User user) {
+                this.id = user.getId();
+                this.username = user.getUsername();
+                this.userPicUrl = user.getUserPicUrl();
+                this.location = user.getLocation();
             }
         }
     }
