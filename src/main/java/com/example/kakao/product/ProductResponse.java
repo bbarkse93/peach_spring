@@ -51,18 +51,16 @@ public class ProductResponse {
         private String productPicUrl;
         private String content;
 
-        private List<LoginDTO> users;
+        private LoginDTO user;
 
-        public FindByIdDTO(Product product, Optional<User> users) {
+        public FindByIdDTO(Product product, Optional<User> user) {
             this.id = product.getId();
             this.productName = product.getProductName();
             this.price = product.getPrice();
             this.category = product.getCategory();
             this.productPicUrl = product.getProductPicUrl();
             this.content = product.getContent();
-            this.users = users.stream()
-                    .map(u -> new LoginDTO(u))
-                    .collect(Collectors.toList());
+            this.user = new LoginDTO(user);
         }
 
         @Getter
@@ -73,11 +71,11 @@ public class ProductResponse {
             private String userPicUrl;
             private String location;
 
-            public LoginDTO(User user) {
-                this.id = user.getId();
-                this.username = user.getUsername();
-                this.userPicUrl = user.getUserPicUrl();
-                this.location = user.getLocation();
+            public LoginDTO(Optional<User> user) {
+                this.id = user.get().getId();
+                this.username = user.get().getUsername();
+                this.userPicUrl = user.get().getUserPicUrl();
+                this.location = user.get().getLocation();
             }
         }
     }
